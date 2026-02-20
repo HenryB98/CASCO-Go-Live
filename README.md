@@ -8,4 +8,14 @@
   Run `npm i` to install the dependencies.
 
   Run `npm run dev` to start the development server.
+
+  ## Deploy to Vercel
+
+  This project includes `vercel.json` with Vite output settings and SPA route rewrites.
+
+  - Import the GitHub repo into Vercel.
+  - Framework preset: `Vite`.
+  - Build command: `npm run build`.
+  - Output directory: `dist`.
+  - Deploy.
   
