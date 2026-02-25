@@ -13,8 +13,463 @@ body,
   overflow-x: hidden;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 body {
   overflow-x: hidden;
+}
+
+.site-shell {
+  position: relative;
+  background:
+    radial-gradient(circle at 12% -8%, color-mix(in srgb, var(--color-custom-blue-100) 55%, white) 0%, transparent 45%),
+    radial-gradient(circle at 92% 6%, color-mix(in srgb, var(--color-custom-blue-50) 78%, white) 0%, transparent 42%),
+    linear-gradient(180deg, color-mix(in srgb, var(--color-custom-blue-50) 56%, white) 0%, #ffffff 25%, #ffffff 100%);
+}
+
+.site-shell::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--color-custom-blue-300) 14%, transparent) 0%, transparent 38%),
+    radial-gradient(circle at 82% 68%, color-mix(in srgb, var(--color-custom-blue-500) 10%, transparent) 0%, transparent 34%);
+  animation: casco-atmosphere-shift 24s ease-in-out infinite;
+}
+
+.site-main {
+  position: relative;
+  z-index: 1;
+}
+
+.page-shell {
+  position: relative;
+  isolation: isolate;
+}
+
+.page-shell > *:not(.page-decor) {
+  position: relative;
+  z-index: 1;
+}
+
+.page-decor {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.page-decor__wash {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 8% 16%, color-mix(in srgb, var(--color-custom-blue-300) 12%, transparent) 0%, transparent 46%),
+    radial-gradient(circle at 92% 10%, color-mix(in srgb, var(--color-custom-blue-500) 10%, transparent) 0%, transparent 38%),
+    radial-gradient(circle at 80% 78%, color-mix(in srgb, var(--color-custom-blue-100) 38%, transparent) 0%, transparent 44%);
+  animation: casco-wash-shift 20s ease-in-out infinite;
+}
+
+.page-decor__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--color-custom-blue-600) 8%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--color-custom-blue-600) 8%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 68px 68px;
+  mask-image: radial-gradient(circle at center, black 0%, black 62%, transparent 100%);
+  animation: casco-grid-float 26s linear infinite;
+}
+
+.page-decor__mesh {
+  position: absolute;
+  width: 64%;
+  height: 64%;
+  border: 1px solid color-mix(in srgb, var(--color-custom-blue-600) 20%, transparent);
+  border-radius: 40% 60% 58% 42% / 38% 40% 60% 62%;
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--color-custom-blue-500) 16%, transparent));
+}
+
+.page-decor__mesh--one {
+  top: -20%;
+  right: -18%;
+  animation: casco-mesh-float 24s ease-in-out infinite;
+}
+
+.page-decor__mesh--two {
+  bottom: -24%;
+  left: -20%;
+  animation: casco-mesh-float 28s ease-in-out infinite reverse;
+}
+
+.page-decor__line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-custom-blue-600) 70%, transparent),
+    transparent
+  );
+  box-shadow: 0 0 12px color-mix(in srgb, var(--color-custom-blue-500) 35%, transparent);
+}
+
+.page-decor__line--one {
+  width: 42%;
+  top: 15%;
+  left: -12%;
+  transform: rotate(-8deg);
+  animation: casco-line-slide-one 14s ease-in-out infinite;
+}
+
+.page-decor__line--two {
+  width: 34%;
+  top: 47%;
+  right: -10%;
+  transform: rotate(11deg);
+  animation: casco-line-slide-two 16s ease-in-out infinite;
+}
+
+.page-decor__line--three {
+  width: 28%;
+  bottom: 12%;
+  left: 8%;
+  transform: rotate(-18deg);
+  animation: casco-line-slide-three 18s ease-in-out infinite;
+}
+
+.page-decor__line--four {
+  width: 24%;
+  top: 72%;
+  right: 16%;
+  transform: rotate(20deg);
+  animation: casco-line-slide-four 19s ease-in-out infinite;
+}
+
+.page-decor__trail {
+  position: absolute;
+  width: 210px;
+  height: 210px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-custom-blue-500) 28%, transparent);
+  mask-image: radial-gradient(circle at center, transparent 50%, black 52%);
+}
+
+.page-decor__trail--one {
+  top: 10%;
+  left: 16%;
+  animation: casco-trail-spin 14s linear infinite;
+}
+
+.page-decor__trail--two {
+  bottom: 6%;
+  right: 10%;
+  animation: casco-trail-spin 16s linear infinite reverse;
+}
+
+.page-decor__orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(4px);
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--color-custom-blue-500) 30%, transparent) 0%,
+    color-mix(in srgb, var(--color-custom-blue-700) 8%, transparent) 70%,
+    transparent 100%
+  );
+}
+
+.page-decor__orb--one {
+  width: 280px;
+  height: 280px;
+  top: -80px;
+  right: -80px;
+  animation: casco-orb-drift 18s ease-in-out infinite;
+}
+
+.page-decor__orb--two {
+  width: 230px;
+  height: 230px;
+  bottom: -90px;
+  left: -70px;
+  animation: casco-orb-drift 20s ease-in-out infinite reverse;
+}
+
+.page-decor__orb--three {
+  width: 140px;
+  height: 140px;
+  top: 42%;
+  left: 45%;
+  opacity: 0.6;
+  animation: casco-orb-drift 16s ease-in-out infinite;
+}
+
+.page-decor__shape {
+  position: absolute;
+  opacity: 0.68;
+  border: 1px solid color-mix(in srgb, var(--color-custom-blue-600) 35%, transparent);
+}
+
+.page-decor__shape--one {
+  width: 128px;
+  height: 128px;
+  right: 9%;
+  top: 22%;
+  transform: rotate(45deg);
+  animation: casco-rotate-slow 24s linear infinite;
+}
+
+.page-decor__shape--two {
+  width: 90px;
+  height: 90px;
+  left: 7%;
+  bottom: 20%;
+  transform: rotate(14deg);
+  animation: casco-rotate-slow 20s linear infinite reverse;
+}
+
+.page-decor__shape--three {
+  width: 62px;
+  height: 62px;
+  top: 34%;
+  left: 32%;
+  border-radius: 999px;
+  animation: casco-pulse-ring 6.5s ease-in-out infinite;
+}
+
+.page-decor__dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-custom-blue-600) 82%, white);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--color-custom-blue-500) 36%, transparent);
+}
+
+.page-decor__dot--one {
+  top: 20%;
+  left: 20%;
+  animation: casco-dot-float 8s ease-in-out infinite;
+}
+
+.page-decor__dot--two {
+  top: 64%;
+  right: 24%;
+  animation: casco-dot-float 7s ease-in-out infinite reverse;
+}
+
+.page-decor__dot--three {
+  bottom: 18%;
+  left: 42%;
+  animation: casco-dot-float 9s ease-in-out infinite;
+}
+
+.page-decor__dot--four {
+  top: 30%;
+  right: 10%;
+  animation: casco-dot-float 8.5s ease-in-out infinite reverse;
+}
+
+.page-shell section {
+  position: relative;
+}
+
+.page-shell section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    color-mix(in srgb, var(--color-custom-blue-300) 3%, transparent) 44%,
+    transparent 82%
+  );
+}
+
+@keyframes casco-grid-float {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(68px, 68px, 0);
+  }
+}
+
+@keyframes casco-atmosphere-shift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(18px, -14px, 0);
+    opacity: 0.9;
+  }
+}
+
+@keyframes casco-wash-shift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(10px, -8px, 0) scale(1.04);
+  }
+}
+
+@keyframes casco-mesh-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(18px, -16px, 0) rotate(14deg);
+  }
+}
+
+@keyframes casco-line-slide-one {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateX(70px);
+    opacity: 0.82;
+  }
+}
+
+@keyframes casco-line-slide-two {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.24;
+  }
+  50% {
+    transform: translateX(-90px);
+    opacity: 0.74;
+  }
+}
+
+@keyframes casco-line-slide-three {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.32;
+  }
+  50% {
+    transform: translateX(58px);
+    opacity: 0.78;
+  }
+}
+
+@keyframes casco-line-slide-four {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.28;
+  }
+  50% {
+    transform: translateX(-52px);
+    opacity: 0.68;
+  }
+}
+
+@keyframes casco-trail-spin {
+  0% {
+    transform: rotate(0deg) scale(0.95);
+    opacity: 0.35;
+  }
+  50% {
+    transform: rotate(180deg) scale(1.02);
+    opacity: 0.64;
+  }
+  100% {
+    transform: rotate(360deg) scale(0.95);
+    opacity: 0.35;
+  }
+}
+
+@keyframes casco-orb-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-16px, 18px, 0);
+  }
+}
+
+@keyframes casco-rotate-slow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes casco-pulse-ring {
+  0%,
+  100% {
+    transform: scale(0.92);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.16);
+    opacity: 0.8;
+  }
+}
+
+@keyframes casco-dot-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-shell::before,
+  .page-decor__wash,
+  .page-decor__grid,
+  .page-decor__mesh,
+  .page-decor__line,
+  .page-decor__trail,
+  .page-decor__orb,
+  .page-decor__shape,
+  .page-decor__dot {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+  html {
+    font-size: 12.75px;
+  }
+}
+
+@media (max-width: 380px) {
+  html {
+    font-size: 11.75px;
+  }
 }
 
 /* Slick Carousel Styles */

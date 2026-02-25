@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import {
   Building2,
@@ -10,10 +11,167 @@ import {
   Users,
   CheckCircle,
   TrendingUp,
+  Pause,
+  Play,
+  ChevronRight,
 } from "lucide-react";
 import ExpertsCarousel from "../components/ExpertsCarousel.jsx";
+import PageDecor from "../components/PageDecor.js";
 
 export default function Home() {
+  const HERO_ROTATION_SECONDS = 5;
+
+  const heroSlides = [
+    {
+      section: "Sports Infrastructure",
+      title: "Sani Abacha Stadium",
+      topic: "Sani Abacha Stadium",
+      description: "Provisional award contract for supply and installation",
+      video: "/homevid.mp4",
+      portfolioId: 1,
+    },
+    {
+      section: "Road Construction",
+      title: "2-Coat Surface Dressed Road",
+      topic: "2-Coat Surface Dressed Road",
+      description: "Construction of a 2-coat surface dressed road",
+      video: "/homevid.mp4",
+      portfolioId: 2,
+    },
+    {
+      section: "Sports Complex",
+      title: "Kofar Na'isa Games Village",
+      topic: "Kofar Na'isa Games Village",
+      description: "Project proposal 2023 - QR code to scan and see construction video",
+      video: "/homevid.mp4",
+      portfolioId: 3,
+    },
+    {
+      section: "Infrastructure",
+      title: "Ahmadu Bello State Road Street Light",
+      topic: "Ahmadu Bello Road Street Light",
+      description: "Street light proposal 2023",
+      video: "/homevid.mp4",
+      portfolioId: 4,
+    },
+    {
+      section: "Landscaping",
+      title: "Dangi Flyover Landscaping Project",
+      topic: "Dangi Flyover Landscaping",
+      description: "Landscaping project for major flyover",
+      video: "/homevid.mp4",
+      portfolioId: 5,
+    },
+    {
+      section: "Commercial Building",
+      title: "MC Group Administrative Building",
+      topic: "MC Group Admin Building",
+      description: "Project proposal 2023",
+      video: "/homevid.mp4",
+      portfolioId: 6,
+    },
+    {
+      section: "Educational Facility",
+      title: "Nigerian Lebanese School Teachers Dorm",
+      topic: "Teachers Dorm Project",
+      description: "Residential facility project",
+      video: "/homevid.mp4",
+      portfolioId: 7,
+    },
+    {
+      section: "Sports Complex",
+      title: "Luxury Racquet Club",
+      topic: "Luxury Racquet Club",
+      description: "Layout overview for luxury sports facility",
+      video: "/homevid.mp4",
+      portfolioId: 8,
+    },
+  ];
+
+  const [activeHeroSlide, setActiveHeroSlide] = useState(1);
+  const [isHeroPaused, setIsHeroPaused] = useState(false);
+  const [countdownProgress, setCountdownProgress] = useState(1);
+  const heroVideoRefs = useRef<Array<HTMLVideoElement | null>>([]);
+  const countdownElapsedMsRef = useRef(0);
+  const countdownAnimationRef = useRef<number | null>(null);
+
+  const goToNextHeroSlide = () => {
+    setActiveHeroSlide((current) => (current + 1) % heroSlides.length);
+  };
+
+  useEffect(() => {
+    if (isHeroPaused) {
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setActiveHeroSlide((current) => (current + 1) % heroSlides.length);
+    }, HERO_ROTATION_SECONDS * 1000);
+
+    return () => window.clearInterval(interval);
+  }, [heroSlides.length, isHeroPaused]);
+
+  useEffect(() => {
+    countdownElapsedMsRef.current = 0;
+    setCountdownProgress(1);
+  }, [activeHeroSlide]);
+
+  useEffect(() => {
+    if (isHeroPaused) {
+      if (countdownAnimationRef.current !== null) {
+        window.cancelAnimationFrame(countdownAnimationRef.current);
+      }
+      return;
+    }
+
+    const totalDurationMs = HERO_ROTATION_SECONDS * 1000;
+    const animationStartTime = performance.now() - countdownElapsedMsRef.current;
+
+    const animateCountdown = (timestamp: number) => {
+      const elapsedMs = Math.min(timestamp - animationStartTime, totalDurationMs);
+      countdownElapsedMsRef.current = elapsedMs;
+      setCountdownProgress(1 - elapsedMs / totalDurationMs);
+
+      if (elapsedMs < totalDurationMs) {
+        countdownAnimationRef.current = window.requestAnimationFrame(animateCountdown);
+      }
+    };
+
+    countdownAnimationRef.current = window.requestAnimationFrame(animateCountdown);
+
+    return () => {
+      if (countdownAnimationRef.current !== null) {
+        window.cancelAnimationFrame(countdownAnimationRef.current);
+      }
+    };
+  }, [activeHeroSlide, isHeroPaused]);
+
+  useEffect(() => {
+    heroVideoRefs.current.forEach((videoElement, index) => {
+      if (!videoElement) {
+        return;
+      }
+
+      const isActiveVideo = index === activeHeroSlide;
+      if (isActiveVideo && !isHeroPaused) {
+        videoElement.play().catch(() => {
+          // Ignore autoplay interruptions caused by browser policies.
+        });
+      } else {
+        videoElement.pause();
+      }
+    });
+  }, [activeHeroSlide, isHeroPaused]);
+
+  const activeHero = heroSlides[activeHeroSlide] ?? {
+    section: "Sports Infrastructure",
+    title: "Sani Abacha Stadium",
+    topic: "Sani Abacha Stadium",
+    description: "Provisional award contract for supply and installation",
+    video: "/homevid.mp4",
+    portfolioId: 1,
+  };
+
   const services = [
     {
       icon: Building2,
@@ -45,114 +203,102 @@ export default function Home() {
   ];
 
   return (
-    <div>
+    <div className="page-shell">
+      <PageDecor />
       {/* Hero Section */}
-      <section className="relative w-full min-h-[85vh] md:h-screen overflow-hidden bg-gradient-to-br from-custom-blue-700 to-custom-blue-600">
-        <div
-          className="absolute inset-0 md:hidden bg-center bg-cover"
-          style={{ backgroundImage: 'url("/image.png")' }}
-        />
+      <section className="relative w-full min-h-[82vh] sm:min-h-[88vh] overflow-hidden bg-black">
+        <div className="absolute inset-0">
+          {heroSlides.map((slide, index) => (
+            <video
+              key={`${slide.title}-${index}`}
+              autoPlay
+              muted
+              loop
+              playsInline
+              ref={(element) => {
+                heroVideoRefs.current[index] = element;
+              }}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+                index === activeHeroSlide ? "opacity-100" : "opacity-0"
+              }`}
+            >
+              <source src={slide.video} type="video/mp4" />
+            </video>
+          ))}
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
 
-        {/* Video Background */}
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="hidden md:block absolute inset-0 w-full h-full object-cover"
+        <button
+          onClick={goToNextHeroSlide}
+          className="absolute z-20 right-4 sm:right-6 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-black/30 border border-white/70 text-white flex items-center justify-center"
+          aria-label="Next hero slide"
         >
-          <source src="/homevid.mp4" type="video/mp4" />
-        </video>
-        <div className="relative z-10 w-full h-full flex items-center">
-          <div className="w-full px-4 lg:px-8">
-            <div className="max-w-[22rem] sm:max-w-md mx-auto md:hidden">
-              <div className="flex items-start gap-3 sm:gap-4">
-                <motion.div
-                  initial={{ opacity: 0, scaleX: 0 }}
-                  animate={{ opacity: 1, scaleX: 1 }}
-                  transition={{ delay: 0.28, duration: 0.55, ease: "easeOut" }}
-                  className="w-[4px] h-36 sm:h-44 bg-white rounded-full mt-1 origin-top shrink-0"
-                />
+          <ChevronRight className="w-7 h-7" />
+        </button>
 
-                <motion.h1
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.35, duration: 0.7, ease: "easeOut" }}
-                  className="text-[2.35rem] sm:text-[3.25rem] font-bold leading-[1.05] tracking-tight text-left"
-                >
-                  <motion.span
-                    className="block text-white"
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.42, duration: 0.55, ease: "easeOut" }}
-                  >
-                    Shaping Your Vision.
-                  </motion.span>
-                  <motion.span
-                    className="block text-custom-blue-500"
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.58, duration: 0.55, ease: "easeOut" }}
-                  >
-                    Building Your Future.
-                  </motion.span>
-                </motion.h1>
-              </div>
+        <div className="relative z-10 w-full h-full px-6 sm:px-10 lg:px-16 pt-12 sm:pt-14 lg:pt-16 pb-10 sm:pb-12 flex flex-col">
+          <motion.div
+            key={activeHero.title}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45 }}
+            className="max-w-3xl"
+          >
+            <div className="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-7">
+              <span className="text-white/90 text-xs sm:text-sm font-bold tracking-[0.16em] uppercase">
+                {activeHero.section}
+              </span>
+              <span className="h-0.5 flex-1 max-w-[22rem] bg-custom-blue-600" />
             </div>
 
-            <div className="hidden md:block max-w-5xl mx-auto text-center drop-shadow-[0_2px_8px_rgba(0,0,0,0.45)]">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="inline-block mb-4"
-              >
-                <span className="bg-custom-blue-700 text-white px-4 py-2 rounded-full text-sm font-semibold ring-1 ring-white/40">
-                  Building Nigeria's Future
-                </span>
-              </motion.div>
+            <h1 className="text-white text-[3.2rem] leading-[1.03] sm:text-[4.4rem] lg:text-[5.2rem] font-bold tracking-tight">
+              {activeHero.title}
+            </h1>
 
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight text-custom-blue-700"
-              >
-                <span className="bg-custom-blue-700 text-white px-2 rounded">Excellence</span> in Every{" "}
-                <span className="bg-custom-blue-700 text-white px-2 rounded">Structure</span>
-              </motion.h1>
+            <p className="text-white/90 text-base sm:text-lg lg:text-xl mt-5 max-w-2xl">
+              {activeHero.description}
+            </p>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="text-base sm:text-lg lg:text-xl text-custom-blue-700 mb-8 leading-relaxed max-w-3xl mx-auto"
-              >
-                CASCO Construction Limited delivers world-class infrastructure, from roads and bridges to
-                iconic buildings. We combine innovation, quality, and sustainability to build projects that
-                drive national development.
-              </motion.p>
+            <Link
+              to={`/portfolio#project-${activeHero.portfolioId}`}
+              className="inline-flex flex-col items-start gap-1 mt-9 sm:mt-10 text-white text-sm sm:text-base font-semibold tracking-[0.12em] uppercase"
+            >
+              <span>Read the Story</span>
+              <span className="h-0.5 w-full bg-custom-blue-600" />
+            </Link>
+          </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
+          <div className="mt-auto pt-10">
+            <button className="text-left" onClick={goToNextHeroSlide}>
+              <span className="text-3xl sm:text-4xl font-semibold text-white">{activeHero.topic}</span>
+              <span className="block h-1 w-full max-w-[19rem] bg-custom-blue-600 mt-2" />
+            </button>
+
+            <div className="relative mt-7 w-12 h-12">
+              <svg className="absolute inset-0 -rotate-90" viewBox="0 0 48 48" aria-hidden="true">
+                <circle cx="24" cy="24" r="22" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="2" />
+                <circle
+                  cx="24"
+                  cy="24"
+                  r="22"
+                  fill="none"
+                  stroke="currentColor"
+                  className="text-custom-blue-600"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeDasharray={138.23}
+                  strokeDashoffset={138.23 * (1 - countdownProgress)}
+                />
+              </svg>
+
+              <button
+                onClick={() => setIsHeroPaused((current) => !current)}
+                className="relative w-12 h-12 rounded-full text-white bg-black/30 flex items-center justify-center"
+                aria-label={isHeroPaused ? "Play hero slider" : "Pause hero slider"}
+                aria-pressed={isHeroPaused}
               >
-                <Link
-                  to="/portfolio"
-                  className="group bg-gradient-to-r from-custom-blue-600 to-custom-blue-700 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105 w-full sm:w-auto"
-                >
-                  View Our Projects
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <Link
-                  to="/contact"
-                  className="bg-white text-custom-blue-600 px-8 py-4 rounded-lg font-semibold border-2 border-white hover:bg-white/90 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
-                >
-                  Get a Quote
-                </Link>
-              </motion.div>
+                {isHeroPaused ? <Play className="w-5 h-5" /> : <Pause className="w-5 h-5" />}
+              </button>
             </div>
           </div>
         </div>
@@ -208,8 +354,19 @@ export default function Home() {
       </section>
 
       {/* Core Values Section - Video */}
-      <section className="relative w-full h-56 sm:h-72 md:h-96 overflow-hidden bg-custom-blue-700">
-        {/* Video Background */}
+      <section className="relative w-full aspect-[3/5] md:aspect-auto md:h-96 overflow-hidden bg-custom-blue-700">
+        {/* Mobile Video Background */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover md:hidden"
+        >
+          <source src="/corevid-mobile.mp4" type="video/mp4" />
+        </video>
+
+        {/* Desktop Video Background */}
         <video
           autoPlay
           muted
@@ -217,7 +374,7 @@ export default function Home() {
           playsInline
           className="hidden md:block absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/corevid.mp4" type="video/mp4" />
+          <source src="/corevid-desktop.mp4" type="video/mp4" />
         </video>
       </section>
 
@@ -229,9 +386,9 @@ export default function Home() {
           }} />
         </div>
 
-        <div className="w-full px-4 lg:px-8 relative z-10">
+        <div className="w-full px-4 relative z-10">
           <div className="max-w-7xl mx-auto">
-            <div className="flex items-center gap-2 sm:gap-3 lg:gap-4 overflow-x-auto lg:overflow-visible lg:justify-between py-1">
+            <div className="flex items-center gap-2 overflow-x-auto py-1 lg:overflow-visible lg:justify-between lg:gap-3">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
@@ -239,13 +396,13 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="text-center shrink-0 min-w-[84px] sm:min-w-[120px]"
+                className="text-center shrink-0 min-w-[76px] lg:min-w-0 lg:flex-1"
               >
-                <div className="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-white/20 rounded-full mb-1">
-                  <stat.icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                <div className="inline-flex items-center justify-center w-8 h-8 bg-white/20 rounded-full mb-1">
+                  <stat.icon className="w-4 h-4" />
                 </div>
-                <div className="text-lg sm:text-2xl lg:text-3xl font-bold mb-0.5">{stat.value}</div>
-                <div className="text-sky-100 text-[10px] sm:text-xs lg:text-sm leading-tight">{stat.label}</div>
+                <div className="text-lg font-bold mb-0.5">{stat.value}</div>
+                <div className="text-sky-100 text-[10px] leading-tight">{stat.label}</div>
               </motion.div>
             ))}          
             </div>

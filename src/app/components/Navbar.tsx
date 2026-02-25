@@ -49,7 +49,7 @@ export default function Navbar() {
               <img
                 src={logo}
                 alt="CASCO logo"
-                className="h-14 w-auto object-contain drop-shadow-[0_4px_12px_rgba(0,75,115,0.35)]"
+                className="h-14 sm:h-16 w-auto object-contain drop-shadow-[0_4px_12px_rgba(0,75,115,0.35)]"
               />
             </Link>
 

@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { MapPin, Phone, Mail, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { MapPin, Phone, Mail, Facebook, Linkedin, Instagram } from "lucide-react";
 import logo2 from "../../styles/logo2.png";
 
 export default function Footer() {
@@ -32,12 +32,14 @@ export default function Footer() {
                 <Facebook className="w-4 h-4" />
               </a>
               <a href="#" className="w-9 h-9 bg-gray-800 hover:bg-sky-600 rounded-full flex items-center justify-center transition-colors">
-                <Twitter className="w-4 h-4" />
+                <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor" aria-hidden="true">
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-1.5V15.6a5.46 5.46 0 1 1-4.72-5.4v2.7a2.78 2.78 0 1 0 1.95 2.65V2.5h2.77a4.84 4.84 0 0 0 3.77 4.19v0Z" />
+                </svg>
               </a>
               <a href="#" className="w-9 h-9 bg-gray-800 hover:bg-sky-600 rounded-full flex items-center justify-center transition-colors">
                 <Linkedin className="w-4 h-4" />
               </a>
-              <a href="#" className="w-9 h-9 bg-gray-800 hover:bg-sky-600 rounded-full flex items-center justify-center transition-colors">
+              <a href="https://www.instagram.com/casco_construction.ng?igsh=MWpqdjV4cjk4a3VsNw==" target="_blank" rel="noopener noreferrer" className="w-9 h-9 bg-gray-800 hover:bg-sky-600 rounded-full flex items-center justify-center transition-colors">
                 <Instagram className="w-4 h-4" />
               </a>
             </div>

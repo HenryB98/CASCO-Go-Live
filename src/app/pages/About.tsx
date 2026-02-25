@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Target, Eye, Shield, Users, TrendingUp, Award } from "lucide-react";
+import PageDecor from "../components/PageDecor.js";
 
 export default function About() {
   const values = [
@@ -36,7 +37,8 @@ export default function About() {
   ];
 
   return (
-    <div>
+    <div className="page-shell">
+      <PageDecor />
       {/* Hero Section */}
       <section className="relative py-16 sm:py-20 lg:py-32 bg-gradient-to-br from-custom-blue-50 via-white to-custom-blue-100 overflow-hidden w-full">
         <div className="absolute inset-0 opacity-5">
@@ -159,7 +161,7 @@ export default function About() {
               transition={{ delay: 0.1 }}
               className="bg-white p-6 sm:p-10 rounded-2xl shadow-xl"
             >
-              <div className="bg-gradient-to-br from-blue-500 to-indigo-600 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+              <div className="bg-gradient-to-br from-custom-blue-600 to-custom-blue-700 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
                 <Target className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-gray-900">Our Mission</h3>

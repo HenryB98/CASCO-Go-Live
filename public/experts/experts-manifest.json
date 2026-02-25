@@ -1,0 +1,72 @@
+[
+  {
+    "expert": 1,
+    "sourcePage": 6,
+    "sourceImageIndex": 2,
+    "sourceName": "Im1.jp2",
+    "rotationApplied": 0,
+    "width": 344,
+    "height": 590,
+    "file": "expert-1.jpg"
+  },
+  {
+    "expert": 2,
+    "sourcePage": 6,
+    "sourceImageIndex": 3,
+    "sourceName": "Im2.jp2",
+    "rotationApplied": 0,
+    "width": 174,
+    "height": 215,
+    "file": "expert-2.jpg"
+  },
+  {
+    "expert": 3,
+    "sourcePage": 6,
+    "sourceImageIndex": 4,
+    "sourceName": "Im3.jpg",
+    "rotationApplied": 180,
+    "width": 236,
+    "height": 226,
+    "file": "expert-3.jpg"
+  },
+  {
+    "expert": 4,
+    "sourcePage": 7,
+    "sourceImageIndex": 2,
+    "sourceName": "Im1.jpg",
+    "rotationApplied": 180,
+    "width": 230,
+    "height": 213,
+    "file": "expert-4.jpg"
+  },
+  {
+    "expert": 5,
+    "sourcePage": 7,
+    "sourceImageIndex": 3,
+    "sourceName": "Im2.jpg",
+    "rotationApplied": 180,
+    "width": 231,
+    "height": 224,
+    "file": "expert-5.jpg"
+  },
+  {
+    "expert": 6,
+    "sourcePage": 7,
+    "sourceImageIndex": 4,
+    "sourceName": "Im3.jp2",
+    "rotationApplied": 0,
+    "width": 241,
+    "height": 282,
+    "file": "expert-6.jpg"
+  },
+  {
+    "expert": 7,
+    "sourcePage": 7,
+    "sourceImageIndex": 5,
+    "sourceName": "Im4.jpg",
+    "rotationApplied": 180,
+    "width": 231,
+    "height": 227,
+    "file": "expert-7.jpg"
+  }
+]

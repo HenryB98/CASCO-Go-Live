@@ -1,9 +1,38 @@
 import { motion } from "motion/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MapPin, Calendar, QrCode } from "lucide-react";
 
 export default function Portfolio() {
   const [filter, setFilter] = useState("all");
+  const [highlightedProjectId, setHighlightedProjectId] = useState<number | null>(null);
+
+  useEffect(() => {
+    const applyHashHighlight = () => {
+      const hashMatch = window.location.hash.match(/^#project-(\d+)$/);
+      if (!hashMatch) {
+        return;
+      }
+
+      const projectId = Number(hashMatch[1]);
+      if (Number.isNaN(projectId)) {
+        return;
+      }
+
+      setFilter("all");
+      setHighlightedProjectId(projectId);
+
+      window.setTimeout(() => {
+        setHighlightedProjectId((current) => (current === projectId ? null : current));
+      }, 2500);
+    };
+
+    applyHashHighlight();
+    window.addEventListener("hashchange", applyHashHighlight);
+
+    return () => {
+      window.removeEventListener("hashchange", applyHashHighlight);
+    };
+  }, []);
 
   const categories = [
     { id: "all", name: "All Projects" },
@@ -152,7 +181,7 @@ export default function Portfolio() {
     : projects.filter(project => project.category === filter);
 
   return (
-    <div>
+    <div className="w-full">
       {/* Hero Section */}
       <section className="relative py-16 sm:py-20 lg:py-32 bg-gradient-to-br from-custom-blue-50 via-white to-custom-blue-100 overflow-hidden w-full">
         <div className="absolute inset-0 opacity-5">
@@ -217,10 +246,13 @@ export default function Portfolio() {
             {filteredProjects.map((project, index) => (
               <motion.div
                 key={project.id}
+                id={`project-${project.id}`}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                className={`group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 scroll-mt-32 ${
+                  highlightedProjectId === project.id ? "ring-4 ring-custom-blue-400 shadow-2xl" : ""
+                }`}
               >
                 <div className="relative h-56 sm:h-64 overflow-hidden">
                   <img

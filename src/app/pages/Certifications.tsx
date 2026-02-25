@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
-import { Award, CheckCircle, Calendar, FileText } from "lucide-react";
+import { Award, CheckCircle, Calendar } from "lucide-react";
 import { ImageWithFallback } from "../components/figma/ImageWithFallback.jsx";
+import PageDecor from "../components/PageDecor.js";
 
 // Certification interface for type safety
 export interface Certification {
@@ -9,7 +10,6 @@ export interface Certification {
   issuedBy: string;
   description: string;
   year: string;
-  category: string;
   image?: string; // Optional - can be uploaded later
 }
 
@@ -17,76 +17,82 @@ export interface Certification {
 const certifications: Certification[] = [
   {
     id: 1,
-    name: "ISO 9001:2015 Quality Management System",
-    issuedBy: "International Organization for Standardization",
-    description: "Certification demonstrating our commitment to quality management systems and continuous improvement in all aspects of our construction services.",
-    year: "2023",
-    category: "Quality Management",
+    name: "Certificate of Incorporation",
+    issuedBy: "Corporate Affairs Commission (CAC)",
+    description: "Officially recognizes Casco Construction Limited as a legally incorporated entity under the laws of the Federal Republic of Nigeria.",
+    year: "2022",
+    image: "/certificates/certificate1.png",
   },
   {
     id: 2,
-    name: "ISO 14001:2015 Environmental Management",
-    issuedBy: "International Organization for Standardization",
-    description: "Recognition of our environmental management practices and commitment to sustainable construction methods.",
+    name: "Special Control Unit Against Money Laundering (SCUML)",
+    issuedBy: "Special Control Unit Against Money Laundering (SCUML)",
+    description: "Certifies our compliance with anti-money laundering regulations as part of our commitment to transparency and ethical practices.",
     year: "2023",
-    category: "Environmental",
+    image: "/certificates/certificate2.png",
   },
   {
     id: 3,
-    name: "ISO 45001:2018 Occupational Health & Safety",
-    issuedBy: "International Organization for Standardization",
-    description: "Certification in occupational health and safety management systems, ensuring the safety of our workforce and stakeholders.",
+    name: "Federal Inland Revenue Service (FIRS)",
+    issuedBy: "Federal Inland Revenue Service (FIRS)",
+    description: "Confirms that Casco Construction Limited is up-to-date with its tax obligations, in compliance with federal regulations.",
     year: "2023",
-    category: "Health & Safety",
+    image: "/certificates/certificate3.png",
   },
   {
     id: 4,
-    name: "COREN Registration",
-    issuedBy: "Council for the Regulation of Engineering in Nigeria",
-    description: "Official registration with COREN, demonstrating compliance with Nigerian engineering standards and regulations.",
+    name: "ECS Clearance Certificate",
+    issuedBy: "Employee Compensation Scheme (ECS)",
+    description: "This clearance ensures our compliance with employee compensation and insurance regulations, reinforcing our commitment to the welfare of our team.",
     year: "2022",
-    category: "Professional Registration",
+    image: "/certificates/certificate4.png",
   },
   {
     id: 5,
-    name: "BPP Certification",
-    issuedBy: "Bureau of Public Procurement",
-    description: "Certified by the Bureau of Public Procurement for government contract eligibility and compliance.",
+    name: "National Pension Commission (PenCom) Clearance",
+    issuedBy: "National Pension Commission (PenCom)",
+    description: "This clearance confirms our compliance with pension regulations, reinforcing our commitment to protecting employees’ retirement benefits in accordance with the National Pension Commission standards for Casco Construction Limited.",
     year: "2023",
-    category: "Government Compliance",
+    image: "/certificates/certificate5.png",
   },
   {
     id: 6,
-    name: "LEED Accredited Professional",
-    issuedBy: "U.S. Green Building Council",
-    description: "Leadership in Energy and Environmental Design certification, showcasing expertise in green building practices.",
+    name: "Interim Registration Report",
+    issuedBy: "Bureau of Public Procurement (BPP)",
+    description: "This report certifies our registration with the Bureau of Public Procurement (BPP) for participation in public sector projects, demonstrating our readiness to engage in government contracts.",
     year: "2022",
-    category: "Sustainability",
+    image: "/certificates/certificate6.png",
   },
   {
     id: 7,
-    name: "Project Management Professional (PMP)",
-    issuedBy: "Project Management Institute",
-    description: "Global certification in project management excellence, ensuring best practices in project execution.",
+    name: "Certificate of Compliance",
+    issuedBy: "Industrial Training Fund (ITF)",
+    description: "This certificate confirms our compliance with mandatory contributions for training and development, ensuring the growth of skills within the workforce.",
     year: "2023",
-    category: "Project Management",
+    image: "/certificates/certificate7.png",
   },
   {
     id: 8,
-    name: "OHSAS 18001 Certification",
-    issuedBy: "British Standards Institution",
-    description: "Occupational Health and Safety Assessment Series certification for workplace safety management.",
+    name: "Contractor Registration - Kano State",
+    issuedBy: "Kano State Works Registration Board",
+    description: "CASCO is registered with the Kano State Works Registration Board for Building and Civil Engineering Construction under Class XX, Group NI.",
     year: "2022",
-    category: "Health & Safety",
+    image: "/certificates/certificate8.png",
+  },
+  {
+    id: 9,
+    name: "Business Premises Registration",
+    issuedBy: "Kano State Ministry of Commerce",
+    description: "Certified by the Kano State Ministry of Commerce for operations at No. 78 Maganda Road, Kano. Registered for Civil and Building Construction.",
+    year: "2024",
+    image: "/certificates/certificate9.png",
   },
 ];
 
-// Group certifications by category
-const categories = Array.from(new Set(certifications.map(cert => cert.category)));
-
 export default function Certifications() {
   return (
-    <div>
+    <div className="page-shell">
+      <PageDecor />
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 bg-gradient-to-br from-custom-blue-50 via-white to-custom-blue-100 overflow-hidden w-full">
         <div className="absolute inset-0 opacity-5">
@@ -124,12 +130,11 @@ export default function Certifications() {
       <section className="py-12 bg-gradient-to-r from-custom-blue-600 to-custom-blue-700 text-white w-full">
         <div className="w-full px-4 lg:px-8">
           <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 text-center">
             {[
               { icon: Award, value: certifications.length.toString(), label: "Certifications" },
               { icon: CheckCircle, value: "100%", label: "Compliance" },
-              { icon: FileText, value: categories.length.toString(), label: "Categories" },
-              { icon: Calendar, value: "2023", label: "Latest Update" },
+              { icon: Calendar, value: "2025", label: "Last Updated" },
             ].map((stat, index) => (
               <motion.div
                 key={index}
@@ -155,13 +160,19 @@ export default function Certifications() {
           <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {certifications.map((cert, index) => (
-              <motion.div
+              <motion.a
                 key={cert.id}
+                href={cert.image ?? "#"}
+                target={cert.image ? "_blank" : undefined}
+                rel={cert.image ? "noopener noreferrer" : undefined}
+                onClick={(event) => {
+                  if (!cert.image) event.preventDefault();
+                }}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group bg-gradient-to-br from-white to-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
+                className="group block cursor-pointer bg-gradient-to-br from-white to-gray-50 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
               >
                 {/* Certificate Image/Placeholder */}
                 <div className="relative h-64 bg-gradient-to-br from-custom-blue-100 to-custom-blue-50 overflow-hidden">
@@ -184,12 +195,6 @@ export default function Certifications() {
                       </div>
                     </div>
                   )}
-                  {/* Category Badge */}
-                  <div className="absolute top-4 right-4">
-                    <span className="inline-block bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-sky-700 shadow-lg">
-                      {cert.category}
-                    </span>
-                  </div>
                 </div>
 
                 {/* Content */}
@@ -208,54 +213,12 @@ export default function Certifications() {
                     {cert.description}
                   </p>
 
-                  <div className="flex items-center gap-2 text-sm text-gray-500">
-                    <Calendar className="w-4 h-4 text-sky-600" />
-                    <span>Issued: {cert.year}</span>
-                  </div>
+                  <p className="mt-3 text-xs font-medium text-sky-700 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    Click to view certificate
+                  </p>
                 </div>
-              </motion.div>
+              </motion.a>
             ))}
-          </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Categories Overview */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-sky-50 w-full">
-        <div className="w-full px-4 lg:px-8">
-          <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl font-bold mb-4">Certification Categories</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Our certifications span multiple categories, demonstrating comprehensive excellence
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {categories.map((category, index) => {
-              const count = certifications.filter(cert => cert.category === category).length;
-              return (
-                <motion.div
-                  key={category}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group"
-                >
-                  <div className="bg-gradient-to-br from-custom-blue-600 to-custom-blue-700 w-12 h-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <CheckCircle className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="font-bold text-lg mb-2 text-gray-900">{category}</h3>
-                  <p className="text-sm text-gray-600">{count} {count === 1 ? 'Certification' : 'Certifications'}</p>
-                </motion.div>
-              );
-            })}
           </div>
           </div>
         </div>

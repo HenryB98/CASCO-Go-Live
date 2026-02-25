@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { MapPin, Phone, Mail, Clock, Send } from "lucide-react";
 import { useState } from "react";
+import PageDecor from "../components/PageDecor.js";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -60,7 +61,8 @@ export default function Contact() {
   ];
 
   return (
-    <div>
+    <div className="page-shell">
+      <PageDecor />
       {/* Hero Section */}
       <section className="relative py-16 sm:py-20 lg:py-32 bg-gradient-to-br from-custom-blue-50 via-white to-custom-blue-100 overflow-hidden w-full">
         <div className="absolute inset-0 opacity-5">

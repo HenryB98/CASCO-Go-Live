@@ -19,9 +19,9 @@ export default function Root() {
   }, [pathname, key]);
 
   return (
-    <div className="w-screen min-h-screen flex flex-col overflow-x-hidden">
+    <div className="site-shell w-screen min-h-screen flex flex-col overflow-x-hidden">
       <Navbar />
-      <main className="flex-grow w-full pt-16 lg:pt-[72px]">
+      <main className="site-main flex-grow w-full pt-16 lg:pt-[72px]">
         <Outlet />
       </main>
       <Footer />

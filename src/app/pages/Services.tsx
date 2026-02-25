@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import { Building2, Ruler, HardHat, ClipboardCheck, Wrench, Users, CheckCircle } from "lucide-react";
+import PageDecor from "../components/PageDecor.js";
 
 export default function Services() {
   const services = [
@@ -123,7 +124,8 @@ export default function Services() {
   ];
 
   return (
-    <div>
+    <div className="page-shell">
+      <PageDecor />
       {/* Hero Section */}
       <section className="relative py-16 sm:py-20 lg:py-32 bg-gradient-to-br from-custom-blue-50 via-white to-custom-blue-100 overflow-hidden w-full">
         <div className="absolute inset-0 opacity-5">
@@ -174,12 +176,16 @@ export default function Services() {
                 }`}
               >
                 <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                  <div className={`bg-gradient-to-br ${service.color} p-6 sm:p-10 lg:p-12 rounded-2xl shadow-2xl`}>
-                    <service.icon className="w-12 h-12 sm:w-16 sm:h-16 text-white mb-6" />
-                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 sm:p-6">
-                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">{service.title}</h3>
-                      <p className="text-white/90">{service.description}</p>
-                    </div>
+                  <div className="relative rounded-2xl shadow-2xl overflow-hidden aspect-video bg-gray-900">
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-cover"
+                    >
+                      <source src="/homevid.mp4" type="video/mp4" />
+                    </video>
                   </div>
                 </div>
 

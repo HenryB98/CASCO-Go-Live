@@ -1,0 +1,83 @@
+[
+  {
+    "page": 6,
+    "index": 1,
+    "name": "Im0.jp2",
+    "width": 1754,
+    "height": 1241,
+    "file": "p6_img1_1754x1241.jpg",
+    "rot180": "p6_img1_1754x1241_r180.jpg"
+  },
+  {
+    "page": 6,
+    "index": 2,
+    "name": "Im1.jp2",
+    "width": 344,
+    "height": 590,
+    "file": "p6_img2_344x590.jpg",
+    "rot180": "p6_img2_344x590_r180.jpg"
+  },
+  {
+    "page": 6,
+    "index": 3,
+    "name": "Im2.jp2",
+    "width": 174,
+    "height": 215,
+    "file": "p6_img3_174x215.jpg",
+    "rot180": "p6_img3_174x215_r180.jpg"
+  },
+  {
+    "page": 6,
+    "index": 4,
+    "name": "Im3.jpg",
+    "width": 236,
+    "height": 226,
+    "file": "p6_img4_236x226.jpg",
+    "rot180": "p6_img4_236x226_r180.jpg"
+  },
+  {
+    "page": 7,
+    "index": 1,
+    "name": "Im0.jp2",
+    "width": 1754,
+    "height": 1241,
+    "file": "p7_img1_1754x1241.jpg",
+    "rot180": "p7_img1_1754x1241_r180.jpg"
+  },
+  {
+    "page": 7,
+    "index": 2,
+    "name": "Im1.jpg",
+    "width": 230,
+    "height": 213,
+    "file": "p7_img2_230x213.jpg",
+    "rot180": "p7_img2_230x213_r180.jpg"
+  },
+  {
+    "page": 7,
+    "index": 3,
+    "name": "Im2.jpg",
+    "width": 231,
+    "height": 224,
+    "file": "p7_img3_231x224.jpg",
+    "rot180": "p7_img3_231x224_r180.jpg"
+  },
+  {
+    "page": 7,
+    "index": 4,
+    "name": "Im3.jp2",
+    "width": 241,
+    "height": 282,
+    "file": "p7_img4_241x282.jpg",
+    "rot180": "p7_img4_241x282_r180.jpg"
+  },
+  {
+    "page": 7,
+    "index": 5,
+    "name": "Im4.jpg",
+    "width": 231,
+    "height": 227,
+    "file": "p7_img5_231x227.jpg",
+    "rot180": "p7_img5_231x227_r180.jpg"
+  }
+]
