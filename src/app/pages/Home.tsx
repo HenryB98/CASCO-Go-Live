@@ -361,6 +361,7 @@ export default function Home() {
           muted
           loop
           playsInline
+          preload="auto"
           className="absolute inset-0 w-full h-full object-cover md:hidden"
         >
           <source src="/corevid-mobile.mp4" type="video/mp4" />
@@ -372,6 +373,7 @@ export default function Home() {
           muted
           loop
           playsInline
+          preload="auto"
           className="hidden md:block absolute inset-0 w-full h-full object-cover"
         >
           <source src="/corevid-desktop.mp4" type="video/mp4" />
