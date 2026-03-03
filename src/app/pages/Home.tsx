@@ -19,31 +19,31 @@ import ExpertsCarousel from "../components/ExpertsCarousel.jsx";
 import PageDecor from "../components/PageDecor.js";
 
 export default function Home() {
-  const HERO_ROTATION_SECONDS = 5;
+  const HERO_ROTATION_SECONDS = 8;
 
   const heroSlides = [
-    {
-      section: "Sports Infrastructure",
-      title: "Sani Abacha Stadium",
-      topic: "Sani Abacha Stadium",
-      description: "Provisional award contract for supply and installation",
-      video: "/homevid.mp4",
-      portfolioId: 1,
-    },
     {
       section: "Road Construction",
       title: "2-Coat Surface Dressed Road",
       topic: "2-Coat Surface Dressed Road",
       description: "Construction of a 2-coat surface dressed road",
-      video: "/homevid.mp4",
+      video: "/2-Coat Surface/2-coatvid.MOV",
       portfolioId: 2,
+    },
+    {
+      section: "Landscaping",
+      title: "Dangi Flyover Landscaping Project",
+      topic: "Dangi Flyover Landscaping",
+      description: "Landscaping project for major flyover",
+      video: "/Dangi Flyover/dangi-vid.MOV",
+      portfolioId: 5,
     },
     {
       section: "Sports Complex",
       title: "Kofar Na'isa Games Village",
       topic: "Kofar Na'isa Games Village",
       description: "Project proposal 2023 - QR code to scan and see construction video",
-      video: "/homevid.mp4",
+      video: "/Kofar Na'Isa/knivid.MOV",
       portfolioId: 3,
     },
     {
@@ -51,40 +51,8 @@ export default function Home() {
       title: "Ahmadu Bello State Road Street Light",
       topic: "Ahmadu Bello Road Street Light",
       description: "Street light proposal 2023",
-      video: "/homevid.mp4",
+      video: "/Ahmadu Bello State/amdvid.MOV",
       portfolioId: 4,
-    },
-    {
-      section: "Landscaping",
-      title: "Dangi Flyover Landscaping Project",
-      topic: "Dangi Flyover Landscaping",
-      description: "Landscaping project for major flyover",
-      video: "/homevid.mp4",
-      portfolioId: 5,
-    },
-    {
-      section: "Commercial Building",
-      title: "MC Group Administrative Building",
-      topic: "MC Group Admin Building",
-      description: "Project proposal 2023",
-      video: "/homevid.mp4",
-      portfolioId: 6,
-    },
-    {
-      section: "Educational Facility",
-      title: "Nigerian Lebanese School Teachers Dorm",
-      topic: "Teachers Dorm Project",
-      description: "Residential facility project",
-      video: "/homevid.mp4",
-      portfolioId: 7,
-    },
-    {
-      section: "Sports Complex",
-      title: "Luxury Racquet Club",
-      topic: "Luxury Racquet Club",
-      description: "Layout overview for luxury sports facility",
-      video: "/homevid.mp4",
-      portfolioId: 8,
     },
   ];
 
@@ -164,12 +132,12 @@ export default function Home() {
   }, [activeHeroSlide, isHeroPaused]);
 
   const activeHero = heroSlides[activeHeroSlide] ?? {
-    section: "Sports Infrastructure",
-    title: "Sani Abacha Stadium",
-    topic: "Sani Abacha Stadium",
-    description: "Provisional award contract for supply and installation",
-    video: "/homevid.mp4",
-    portfolioId: 1,
+    section: "Road Construction",
+    title: "2-Coat Surface Dressed Road",
+    topic: "2-Coat Surface Dressed Road",
+    description: "Construction of a 2-coat surface dressed road",
+    video: "/2-Coat Surface/2-coatvid.MOV",
+    portfolioId: 2,
   };
 
   const services = [
@@ -211,10 +179,11 @@ export default function Home() {
           {heroSlides.map((slide, index) => (
             <video
               key={`${slide.title}-${index}`}
-              autoPlay
+              autoPlay={index === activeHeroSlide}
               muted
               loop
               playsInline
+              preload={index === activeHeroSlide ? "auto" : "metadata"}
               ref={(element) => {
                 heroVideoRefs.current[index] = element;
               }}
@@ -260,7 +229,7 @@ export default function Home() {
             </p>
 
             <Link
-              to={`/portfolio#project-${activeHero.portfolioId}`}
+              to="/portfolio"
               className="inline-flex flex-col items-start gap-1 mt-9 sm:mt-10 text-white text-sm sm:text-base font-semibold tracking-[0.12em] uppercase"
             >
               <span>Read the Story</span>

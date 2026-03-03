@@ -17,6 +17,40 @@ export default defineConfig({
     },
   },
 
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes('node_modules')) {
+            return undefined
+          }
+
+          if (id.includes('react-router') || id.includes('react-dom') || id.includes('/react/')) {
+            return 'framework'
+          }
+
+          if (id.includes('motion') || id.includes('lucide-react')) {
+            return 'animation'
+          }
+
+          if (id.includes('react-slick') || id.includes('slick-carousel')) {
+            return 'carousel'
+          }
+
+          if (id.includes('recharts')) {
+            return 'charts'
+          }
+
+          if (id.includes('@radix-ui')) {
+            return 'radix'
+          }
+
+          return undefined
+        },
+      },
+    },
+  },
+
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv'],
 })

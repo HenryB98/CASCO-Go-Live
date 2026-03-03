@@ -1,10 +1,21 @@
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
-import { MapPin, Calendar, QrCode } from "lucide-react";
+import { MapPin, Calendar } from "lucide-react";
 
 export default function Portfolio() {
   const [filter, setFilter] = useState("all");
   const [highlightedProjectId, setHighlightedProjectId] = useState<number | null>(null);
+  const [portfolioClock, setPortfolioClock] = useState(() => Date.now());
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      setPortfolioClock(Date.now());
+    }, 400);
+
+    return () => {
+      window.clearInterval(intervalId);
+    };
+  }, []);
 
   useEffect(() => {
     const applyHashHighlight = () => {
@@ -50,8 +61,17 @@ export default function Portfolio() {
       year: "2023",
       category: "sports",
       description: "Provisional award contract for supply and installation",
-      image: "https://images.unsplash.com/photo-1770039998244-7ed06c2c9259?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdGFkaXVtJTIwY29uc3RydWN0aW9uJTIwc3BvcnRzfGVufDF8fHx8MTc3MTE4MjMxOHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      tag: "Sports Infrastructure"
+      image: "/Sani Abacha Stadium/Screenshot 2026-02-28 154632.png",
+      images: [
+        "/Sani Abacha Stadium/Screenshot 2026-02-28 154632.png",
+        "/Sani Abacha Stadium/Screenshot 2026-02-28 155341.png",
+        "/Sani Abacha Stadium/Screenshot 2026-02-28 155359.png",
+        "/Sani Abacha Stadium/Screenshot 2026-02-28 155416.png",
+        "/Sani Abacha Stadium/Screenshot 2026-02-28 155435.png",
+        "/Sani Abacha Stadium/Screenshot 2026-02-28 155448.png"
+      ],
+      tag: "Sports Infrastructure",
+      pdfUrl: "/casco-profile-2025.pdf#page=28"
     },
     {
       id: 2,
@@ -60,8 +80,20 @@ export default function Portfolio() {
       year: "2023",
       category: "roads",
       description: "Construction of a 2-coat surface dressed road",
-      image: "https://images.unsplash.com/photo-1708117242652-25dc76c4b30c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyb2FkJTIwY29uc3RydWN0aW9uJTIwaGlnaHdheXxlbnwxfHx8fDE3NzExODIzMTh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      tag: "Road Construction"
+      image: "/2-Coat Surface/Screenshot 2026-02-28 143907.png",
+      images: [
+        "/2-Coat Surface/Screenshot 2026-02-28 143907.png",
+        "/2-Coat Surface/Screenshot 2026-02-28 143922.png",
+        "/2-Coat Surface/Screenshot 2026-02-28 143941.png",
+        "/2-Coat Surface/Screenshot 2026-02-28 144000.png",
+        "/2-Coat Surface/Screenshot 2026-02-28 144014.png",
+        "/2-Coat Surface/Screenshot 2026-02-28 144122.png",
+        "/2-Coat Surface/Screenshot 2026-02-28 144200.png",
+        "/2-Coat Surface/Screenshot 2026-02-28 161605.png",
+        "/2-Coat Surface/Screenshot 2026-02-28 161625.png"
+      ],
+      tag: "Road Construction",
+      pdfUrl: "/casco-profile-2025.pdf#page=32"
     },
     {
       id: 3,
@@ -70,9 +102,17 @@ export default function Portfolio() {
       year: "2023",
       category: "sports",
       description: "Project proposal 2023 - QR code to scan and see construction video",
-      image: "https://images.unsplash.com/photo-1770039998244-7ed06c2c9259?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdGFkaXVtJTIwY29uc3RydWN0aW9uJTIwc3BvcnRzfGVufDF8fHx8MTc3MTE4MjMxOHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      image: "/Kofar Na'Isa/Screenshot 2026-03-01 030008.png",
+      images: [
+        "/Kofar Na'Isa/Screenshot 2026-03-01 030008.png",
+        "/Kofar Na'Isa/Screenshot 2026-03-01 030107.png",
+        "/Kofar Na'Isa/Screenshot 2026-03-01 030122.png",
+        "/Kofar Na'Isa/Screenshot 2026-03-01 030140.png",
+        "/Kofar Na'Isa/Screenshot 2026-03-01 030158.png",
+        "/Kofar Na'Isa/Screenshot 2026-03-01 030212.png"
+      ],
       tag: "Sports Complex",
-      hasQR: true
+      pdfUrl: "/casco-profile-2025.pdf#page=36"
     },
     {
       id: 4,
@@ -81,8 +121,18 @@ export default function Portfolio() {
       year: "2023",
       category: "infrastructure",
       description: "Street light proposal 2023",
-      image: "https://images.unsplash.com/photo-1708117242652-25dc76c4b30c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyb2FkJTIwY29uc3RydWN0aW9uJTIwaGlnaHdheXxlbnwxfHx8fDE3NzExODIzMTh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      tag: "Infrastructure"
+      image: "/Ahmadu Bello State/Screenshot 2026-03-01 030754.png",
+      images: [
+        "/Ahmadu Bello State/Screenshot 2026-03-01 030754.png",
+        "/Ahmadu Bello State/Screenshot 2026-03-01 030819.png",
+        "/Ahmadu Bello State/Screenshot 2026-03-01 030832.png",
+        "/Ahmadu Bello State/Screenshot 2026-03-01 030856.png",
+        "/Ahmadu Bello State/Screenshot 2026-03-01 030908.png",
+        "/Ahmadu Bello State/Screenshot 2026-03-01 030925.png",
+        "/Ahmadu Bello State/Screenshot 2026-03-01 030939.png"
+      ],
+      tag: "Infrastructure",
+      pdfUrl: "/casco-profile-2025.pdf#page=45"
     },
     {
       id: 5,
@@ -91,8 +141,20 @@ export default function Portfolio() {
       year: "2023",
       category: "infrastructure",
       description: "Landscaping project for major flyover",
-      image: "https://images.unsplash.com/photo-1708117242652-25dc76c4b30c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxyb2FkJTIwY29uc3RydWN0aW9uJTIwaGlnaHdheXxlbnwxfHx8fDE3NzExODIzMTh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      tag: "Landscaping"
+      image: "/Dangi Flyover/Screenshot 2026-03-01 031446.png",
+      images: [
+        "/Dangi Flyover/Screenshot 2026-03-01 031446.png",
+        "/Dangi Flyover/Screenshot 2026-03-01 031512.png",
+        "/Dangi Flyover/Screenshot 2026-03-01 031530.png",
+        "/Dangi Flyover/Screenshot 2026-03-01 031618.png",
+        "/Dangi Flyover/Screenshot 2026-03-01 031632.png",
+        "/Dangi Flyover/Screenshot 2026-03-01 031646.png",
+        "/Dangi Flyover/Screenshot 2026-03-01 031700.png",
+        "/Dangi Flyover/Screenshot 2026-03-01 031713.png",
+        "/Dangi Flyover/Screenshot 2026-03-01 031728.png"
+      ],
+      tag: "Landscaping",
+      pdfUrl: "/casco-profile-2025.pdf#page=49"
     },
     {
       id: 6,
@@ -101,8 +163,20 @@ export default function Portfolio() {
       year: "2023",
       category: "buildings",
       description: "Project proposal 2023",
-      image: "https://images.unsplash.com/photo-1695067440629-b5e513976100?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcmNoaXRlY3R1cmFsJTIwYnVpbGRpbmclMjBtb2Rlcm58ZW58MXx8fHwxNzcxMTI0MjE4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      tag: "Commercial Building"
+      image: "/MC Group/Screenshot 2026-03-01 032042.png",
+      images: [
+        "/MC Group/Screenshot 2026-03-01 032042.png",
+        "/MC Group/Screenshot 2026-03-01 032102.png",
+        "/MC Group/Screenshot 2026-03-01 032116.png",
+        "/MC Group/Screenshot 2026-03-01 032131.png",
+        "/MC Group/Screenshot 2026-03-01 032154.png",
+        "/MC Group/Screenshot 2026-03-01 032211.png",
+        "/MC Group/Screenshot 2026-03-01 032237.png",
+        "/MC Group/Screenshot 2026-03-01 032301.png",
+        "/MC Group/Screenshot 2026-03-01 032321.png"
+      ],
+      tag: "Commercial Building",
+      pdfUrl: "/casco-profile-2025.pdf#page=54"
     },
     {
       id: 7,
@@ -111,8 +185,17 @@ export default function Portfolio() {
       year: "2023",
       category: "buildings",
       description: "Residential facility project",
-      image: "https://images.unsplash.com/photo-1695067440629-b5e513976100?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcmNoaXRlY3R1cmFsJTIwYnVpbGRpbmclMjBtb2Rlcm58ZW58MXx8fHwxNzcxMTI0MjE4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      tag: "Educational Facility"
+      image: "/NLS Teachers Dorm/Screenshot 2026-03-01 032602.png",
+      images: [
+        "/NLS Teachers Dorm/Screenshot 2026-03-01 032602.png",
+        "/NLS Teachers Dorm/Screenshot 2026-03-01 032614.png",
+        "/NLS Teachers Dorm/Screenshot 2026-03-01 032629.png",
+        "/NLS Teachers Dorm/Screenshot 2026-03-01 032647.png",
+        "/NLS Teachers Dorm/Screenshot 2026-03-01 032658.png",
+        "/NLS Teachers Dorm/Screenshot 2026-03-01 032711.png"
+      ],
+      tag: "Educational Facility",
+      pdfUrl: "/casco-profile-2025.pdf#page=58"
     },
     {
       id: 8,
@@ -121,8 +204,23 @@ export default function Portfolio() {
       year: "2018",
       category: "sports",
       description: "Layout overview for luxury sports facility",
-      image: "https://images.unsplash.com/photo-1768223933860-6d62bc5b2ff3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBidWlsZGluZyUyMGFyY2hpdGVjdHVyZXxlbnwxfHx8fDE3NzEwODU5MDd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      tag: "Sports Complex"
+      image: "/Luxury Racquet Club/Screenshot 2026-03-01 032923.png",
+      images: [
+        "/Luxury Racquet Club/Screenshot 2026-03-01 032923.png",
+        "/Luxury Racquet Club/Screenshot 2026-03-01 032951.png",
+        "/Luxury Racquet Club/Screenshot 2026-03-01 033005.png",
+        "/Luxury Racquet Club/Screenshot 2026-03-01 033027.png",
+        "/Luxury Racquet Club/Screenshot 2026-03-01 033040.png",
+        "/Luxury Racquet Club/Screenshot 2026-03-01 033052.png",
+        "/Luxury Racquet Club/Screenshot 2026-03-01 033105.png",
+        "/Luxury Racquet Club/Screenshot 2026-03-01 033131.png",
+        "/Luxury Racquet Club/Screenshot 2026-03-01 033436.png",
+        "/Luxury Racquet Club/Screenshot 2026-03-01 033455.png",
+        "/Luxury Racquet Club/Screenshot 2026-03-01 033521.png",
+        "/Luxury Racquet Club/Screenshot 2026-03-01 033543.png"
+      ],
+      tag: "Sports Complex",
+      pdfUrl: "/casco-profile-2025.pdf#page=60"
     },
     {
       id: 9,
@@ -131,8 +229,19 @@ export default function Portfolio() {
       year: "2023",
       category: "buildings",
       description: "By Ali Hassan, Yi Shan, Xin Guan, Ada Erinal",
-      image: "https://images.unsplash.com/photo-1768223933860-6d62bc5b2ff3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBidWlsZGluZyUyMGFyY2hpdGVjdHVyZXxlbnwxfHx8fDE3NzEwODU5MDd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      tag: "Mixed-Use Development"
+      image: "/Place Torino/Screenshot 2026-03-01 034004.png",
+      images: [
+        "/Place Torino/Screenshot 2026-03-01 034004.png",
+        "/Place Torino/Screenshot 2026-03-01 034036.png",
+        "/Place Torino/Screenshot 2026-03-01 034052.png",
+        "/Place Torino/Screenshot 2026-03-01 034102.png",
+        "/Place Torino/Screenshot 2026-03-01 034116.png",
+        "/Place Torino/Screenshot 2026-03-01 034142.png",
+        "/Place Torino/Screenshot 2026-03-01 034159.png",
+        "/Place Torino/Screenshot 2026-03-01 034212.png"
+      ],
+      tag: "Mixed-Use Development",
+      pdfUrl: "/casco-profile-2025.pdf#page=66"
     },
     {
       id: 10,
@@ -141,8 +250,15 @@ export default function Portfolio() {
       year: "2023",
       category: "buildings",
       description: "By Ali Hassan and Ada Erinal",
-      image: "https://images.unsplash.com/photo-1695067440629-b5e513976100?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcmNoaXRlY3R1cmFsJTIwYnVpbGRpbmclMjBtb2Rlcm58ZW58MXx8fHwxNzcxMTI0MjE4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      tag: "Industrial Renovation"
+      image: "/Transformation of Nielbolo/Screenshot 2026-03-01 034646.png",
+      images: [
+        "/Transformation of Nielbolo/Screenshot 2026-03-01 034646.png",
+        "/Transformation of Nielbolo/Screenshot 2026-03-01 034706.png",
+        "/Transformation of Nielbolo/Screenshot 2026-03-01 034719.png",
+        "/Transformation of Nielbolo/Screenshot 2026-03-01 034732.png"
+      ],
+      tag: "Industrial Renovation",
+      pdfUrl: "/casco-profile-2025.pdf#page=72"
     },
     {
       id: 11,
@@ -151,8 +267,15 @@ export default function Portfolio() {
       year: "2023",
       category: "buildings",
       description: "By Ali Hassan and Hussein El Khatib",
-      image: "https://images.unsplash.com/photo-1695067440629-b5e513976100?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcmNoaXRlY3R1cmFsJTIwYnVpbGRpbmclMjBtb2Rlcm58ZW58MXx8fHwxNzcxMTI0MjE4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      tag: "Residential"
+      image: "/Housing Projects/Screenshot 2026-03-01 035127.png",
+      images: [
+        "/Housing Projects/Screenshot 2026-03-01 035127.png",
+        "/Housing Projects/Screenshot 2026-03-01 035153.png",
+        "/Housing Projects/Screenshot 2026-03-01 035208.png",
+        "/Housing Projects/Screenshot 2026-03-01 035243.png"
+      ],
+      tag: "Residential",
+      pdfUrl: "/casco-profile-2025.pdf#page=78"
     },
     {
       id: 12,
@@ -161,8 +284,14 @@ export default function Portfolio() {
       year: "2023",
       category: "buildings",
       description: "By Ali Hassan and Hussein El Khatib",
-      image: "https://images.unsplash.com/photo-1768223933860-6d62bc5b2ff3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBidWlsZGluZyUyMGFyY2hpdGVjdHVyZXxlbnwxfHx8fDE3NzEwODU5MDd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      tag: "Entertainment"
+      image: "/Night Life/Screenshot 2026-03-01 035459.png",
+      images: [
+        "/Night Life/Screenshot 2026-03-01 035459.png",
+        "/Night Life/Screenshot 2026-03-01 035525.png",
+        "/Night Life/Screenshot 2026-03-01 035543.png"
+      ],
+      tag: "Entertainment",
+      pdfUrl: "/casco-profile-2025.pdf#page=83"
     },
     {
       id: 13,
@@ -171,14 +300,35 @@ export default function Portfolio() {
       year: "2023",
       category: "infrastructure",
       description: "In partnership with Malik Agro Industries Pakistan",
-      image: "https://images.unsplash.com/photo-1769721209842-e46c60e7fbf9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBjb25zdHJ1Y3Rpb24lMjBzaXRlJTIwY3JhbmV8ZW58MXx8fHwxNzcxMTAzNDI2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-      tag: "Equipment Supply"
+      image: "/Supply of Agric Eqt/Screenshot 2026-03-01 035900.png",
+      images: [
+        "/Supply of Agric Eqt/Screenshot 2026-03-01 035900.png",
+        "/Supply of Agric Eqt/Screenshot 2026-03-01 035910.png",
+        "/Supply of Agric Eqt/Screenshot 2026-03-01 035925.png",
+        "/Supply of Agric Eqt/Screenshot 2026-03-01 035942.png",
+        "/Supply of Agric Eqt/Screenshot 2026-03-01 040003.png",
+        "/Supply of Agric Eqt/Screenshot 2026-03-01 040016.png"
+      ],
+      tag: "Equipment Supply",
+      pdfUrl: "/casco-profile-2025.pdf#page=87"
     },
   ];
 
   const filteredProjects = filter === "all" 
     ? projects 
     : projects.filter(project => project.category === filter);
+
+  const getCurrentProjectImage = (project: { id: number; image: string; images?: string[] }) => {
+    if (!project.images?.length) {
+      return project.image;
+    }
+
+    const intervalMs = 1800 + (project.id % 5) * 350;
+    const startOffsetMs = project.id * 700;
+    const frameIndex = Math.floor((portfolioClock + startOffsetMs) / intervalMs) % project.images.length;
+
+    return project.images[frameIndex];
+  };
 
   return (
     <div className="w-full">
@@ -243,20 +393,38 @@ export default function Portfolio() {
         <div className="w-full px-4 lg:px-8">
           <div className="max-w-7xl mx-auto">
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project, index) => (
+            {filteredProjects.map((project, index) => {
+              const currentImage = getCurrentProjectImage(project);
+
+              return (
               <motion.div
                 key={project.id}
                 id={`project-${project.id}`}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
+                onClick={project.pdfUrl ? () => window.open(project.pdfUrl, "_blank", "noopener,noreferrer") : undefined}
+                onKeyDown={project.pdfUrl ? (event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    window.open(project.pdfUrl, "_blank", "noopener,noreferrer");
+                  }
+                } : undefined}
+                role={project.pdfUrl ? "link" : undefined}
+                tabIndex={project.pdfUrl ? 0 : undefined}
                 className={`group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 scroll-mt-32 ${
+                  project.pdfUrl ? "cursor-pointer focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2" : ""
+                } ${
                   highlightedProjectId === project.id ? "ring-4 ring-custom-blue-400 shadow-2xl" : ""
                 }`}
               >
                 <div className="relative h-56 sm:h-64 overflow-hidden">
-                  <img
-                    src={project.image}
+                  <motion.img
+                    key={currentImage}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.6, ease: "easeInOut" }}
+                    src={currentImage}
                     alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
@@ -266,11 +434,6 @@ export default function Portfolio() {
                       {project.tag}
                     </span>
                   </div>
-                  {project.hasQR && (
-                    <div className="absolute top-4 right-4 bg-white p-2 rounded-lg">
-                      <QrCode className="w-6 h-6 text-sky-600" />
-                    </div>
-                  )}
                 </div>
 
                 <div className="p-6">
@@ -291,7 +454,8 @@ export default function Portfolio() {
                   </div>
                 </div>
               </motion.div>
-            ))}
+              );
+            })}
         </div>
         </div>
         </div>

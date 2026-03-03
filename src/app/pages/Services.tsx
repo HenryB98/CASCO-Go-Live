@@ -16,7 +16,8 @@ export default function Services() {
         "Traffic management systems",
         "Quality assurance and testing"
       ],
-      color: "from-custom-blue-500 to-custom-blue-600"
+      color: "from-custom-blue-500 to-custom-blue-600",
+      video: "/Servicesvid/Road C and R.mp4"
     },
     {
       icon: Ruler,
@@ -30,7 +31,8 @@ export default function Services() {
         "Sustainable design solutions",
         "Regulatory compliance planning"
       ],
-      color: "from-custom-blue-600 to-custom-blue-700"
+      color: "from-custom-blue-600 to-custom-blue-700",
+      video: "/Servicesvid/Architectural D and D.mp4"
     },
     {
       icon: HardHat,
@@ -44,7 +46,8 @@ export default function Services() {
         "Quality materials and workmanship",
         "Timely project delivery"
       ],
-      color: "from-indigo-500 to-purple-600"
+      color: "from-indigo-500 to-purple-600",
+      video: "/Servicesvid/Building C.mp4"
     },
     {
       icon: ClipboardCheck,
@@ -58,7 +61,8 @@ export default function Services() {
         "Stakeholder communication",
         "Documentation and reporting"
       ],
-      color: "from-custom-blue-600 to-custom-blue-700"
+      color: "from-custom-blue-600 to-custom-blue-700",
+      video: "/Servicesvid/Comprehensive P M.mp4"
     },
     {
       icon: Wrench,
@@ -72,7 +76,8 @@ export default function Services() {
         "Equipment and machinery deployment",
         "Progress monitoring and control"
       ],
-      color: "from-custom-blue-600 to-custom-blue-700"
+      color: "from-custom-blue-600 to-custom-blue-700",
+      video: "/Servicesvid/Construction Execution.mp4"
     },
     {
       icon: Users,
@@ -86,7 +91,8 @@ export default function Services() {
         "Contract administration",
         "Post-construction services"
       ],
-      color: "from-rose-500 to-red-600"
+      color: "from-rose-500 to-red-600",
+      video: "/Servicesvid/Construction Consultation.mp4"
     }
   ];
 
@@ -184,7 +190,7 @@ export default function Services() {
                       playsInline
                       className="w-full h-full object-cover"
                     >
-                      <source src="/homevid.mp4" type="video/mp4" />
+                      <source src={service.video} type="video/mp4" />
                     </video>
                   </div>
                 </div>

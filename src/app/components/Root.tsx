@@ -1,10 +1,11 @@
 import { Outlet, useLocation } from "react-router";
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
 
 export default function Root() {
   const { pathname, key } = useLocation();
+  const mainRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if ("scrollRestoration" in window.history) {
@@ -13,15 +14,30 @@ export default function Root() {
   }, []);
 
   useLayoutEffect(() => {
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
+    const resetToTop = () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      if (mainRef.current) {
+        mainRef.current.scrollTop = 0;
+      }
+    };
+
+    resetToTop();
+
+    const frameId = window.requestAnimationFrame(() => {
+      resetToTop();
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+    };
   }, [pathname, key]);
 
   return (
     <div className="site-shell w-screen min-h-screen flex flex-col overflow-x-hidden">
       <Navbar />
-      <main className="site-main flex-grow w-full pt-16 lg:pt-[72px]">
+      <main ref={mainRef} className="site-main flex-grow w-full pt-16 lg:pt-[72px]">
         <Outlet />
       </main>
       <Footer />
