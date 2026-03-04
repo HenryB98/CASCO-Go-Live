@@ -11,19 +11,59 @@ export default function Contact() {
     subject: "",
     message: "",
   });
+  const [submissionNotice, setSubmissionNotice] = useState<string | null>(null);
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const CONTACT_EMAIL = "cascoconstructionlimited@gmail.com";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Form submitted:", formData);
-    alert("Thank you for your message! We'll get back to you soon.");
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      subject: "",
-      message: "",
-    });
+    setSubmissionNotice(null);
+    setSubmissionError(null);
+
+    const subjectLabelMap: Record<string, string> = {
+      "project-inquiry": "Project Inquiry",
+      "quote-request": "Quote Request",
+      partnership: "Partnership Opportunity",
+      general: "General Inquiry",
+      support: "Support",
+    };
+
+    const readableSubject = subjectLabelMap[formData.subject] ?? "Contact Form Message";
+
+    setIsSubmitting(true);
+
+    fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...formData,
+        readableSubject,
+      }),
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error("Failed to send");
+        }
+
+        setSubmissionNotice("Message sent successfully. We'll get back to you soon.");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
+      })
+      .catch(() => {
+        setSubmissionError("Message could not be sent right now. Please try again shortly.");
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -131,6 +171,16 @@ export default function Contact() {
             >
               <div className="bg-gradient-to-br from-white to-sky-50 p-6 sm:p-8 rounded-2xl shadow-xl border border-gray-100">
                 <h2 className="text-3xl font-bold mb-6">Send us a Message</h2>
+                {submissionNotice && (
+                  <div className="mb-6 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm font-medium text-green-700">
+                    {submissionNotice}
+                  </div>
+                )}
+                {submissionError && (
+                  <div className="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+                    {submissionError}
+                  </div>
+                )}
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-semibold text-gray-700 mb-2">
@@ -220,10 +270,11 @@ export default function Contact() {
 
                   <button
                     type="submit"
+                    disabled={isSubmitting}
                     className="w-full bg-gradient-to-r from-custom-blue-600 to-custom-blue-700 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2"
                   >
                     <Send className="w-5 h-5" />
-                    Send Message
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </button>
                 </form>
               </div>
@@ -299,7 +350,7 @@ export default function Contact() {
                 Call Us Now
               </a>
               <a
-                href="mailto:info@cascoconstruction.ng"
+                href="mailto:cascoconstructionlimited@gmail.com"
                 className="bg-white text-sky-600 px-8 py-4 rounded-lg font-semibold border-2 border-sky-600 hover:bg-sky-50 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 w-full sm:w-auto"
               >
                 <Mail className="w-5 h-5" />
